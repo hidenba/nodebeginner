@@ -1,6 +1,6 @@
 var exec = require("child_process").exec;
 
-function start(response) {
+function start(response, postData) {
   console.log("Request handler 'start' was called.");
 
   var body = '<html>' +
@@ -10,6 +10,7 @@ function start(response) {
     '<body>' +
     '<form action="/upload" method="post">' +
     '<textarea name="text" rows="20" cols="60"></textarea>' +
+    '<input type="submit" value="Submit text" />' +
     '</form>' +
     '</body>' +
     '<html>';
@@ -19,10 +20,10 @@ function start(response) {
   response.end();
 }
 
-function upload(response) {
+function upload(response, postData) {
   console.log("Request handler 'upload' was called.");
   response.writeHead(200, {"Content-Type":"text/plain"});
-  response.write("Hello upload");
+  response.write("You've send: " + postData);
   response.end();
 }
 
